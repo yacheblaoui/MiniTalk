@@ -6,41 +6,41 @@
 /*   By: yachebla <yachebla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/28 14:07:33 by yachebla          #+#    #+#             */
-/*   Updated: 2023/01/28 14:07:34 by yachebla         ###   ########.fr       */
+/*   Updated: 2023/02/13 19:16:28 by yachebla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minitalk.h"
 
-static	void	process_bits(int *bit_counter, char *received_char)
+static	void	signal_process(int *sig, char *p_char)
 {
-	if (*bit_counter == 8)
-	{
-		write(1, received_char, 1);
-		*bit_counter = 0;
-		*received_char = 0;
-	}
+	if (*sig == SIGUSR1)
+		*p_char = (*p_char << 1) | 1;
+	else if (*sig == SIGUSR2)
+		*p_char = *p_char << 1;
 }
 
 static	void	signal_handler(int sig, siginfo_t *info, void *data)
 {
-	static int		bit_counter;
-	static char		received_char;
-	static pid_t	pid_client;
+	static int		eight_bits;
+	static char		p_char;
+	static pid_t	c_pid;
 
 	(void)data;
-	if (pid_client != info->si_pid)
+	if (c_pid != info->si_pid)
 	{
-		pid_client = info->si_pid;
-		bit_counter = 0;
-		received_char = 0;
+		c_pid = info->si_pid;
+		eight_bits = 0;
+		p_char = 0;
 	}
-	if (sig == SIGUSR1)
-		received_char = (received_char << 1) | 1;
-	else if (sig == SIGUSR2)
-		received_char = received_char << 1;
-	bit_counter++;
-	process_bits(&bit_counter, &received_char);
+	signal_process(&sig, &p_char);
+	eight_bits++;
+	if (eight_bits == 8)
+	{
+		write(1, &p_char, 1);
+		eight_bits = 0;
+		p_char = 0;
+	}
 }
 
 int	main(int ac, char **av)
@@ -49,9 +49,10 @@ int	main(int ac, char **av)
 
 	sa.sa_flags = SA_SIGINFO;
 	sa.sa_sigaction = signal_handler;
-	if (ac == 1 && av[0])
+	(void)av;
+	if (ac == 1)
 	{
-		ft_putstr("server's PID is : ");
+		ft_putstr("I'm the server : ");
 		ft_putnbr(getpid());
 		write(1, "\n", 1);
 		sigaction(SIGUSR1, &sa, 0);
@@ -60,5 +61,5 @@ int	main(int ac, char **av)
 			pause();
 	}
 	else
-		ft_putstr("Error\n");
+		ft_putstr("ERROR\n");
 }

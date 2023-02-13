@@ -6,13 +6,13 @@
 /*   By: yachebla <yachebla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/28 14:07:29 by yachebla          #+#    #+#             */
-/*   Updated: 2023/01/28 14:07:30 by yachebla         ###   ########.fr       */
+/*   Updated: 2023/02/13 19:08:53 by yachebla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minitalk.h"
 
-static	void	ft_shift(int pid, char c)
+static	void	char_by_char(int pid, char c)
 {
 	int	i;
 
@@ -41,7 +41,7 @@ int	main(int ac, char **av)
         }
         while (ft_strlen(av[2]) >= i)
 		{
-        	ft_shift(ft_atoi(av[1]), av[2][i]);
+        	char_by_char(ft_atoi(av[1]), av[2][i]);
 			i++;
 		}
 	}
