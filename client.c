@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: yachebla <yachebla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/28 14:07:29 by yachebla          #+#    #+#             */
-/*   Updated: 2023/02/13 19:08:53 by yachebla         ###   ########.fr       */
+/*   Created: 2023/02/14 15:07:18 by yachebla          #+#    #+#             */
+/*   Updated: 2023/02/14 15:09:01 by yachebla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,16 +36,15 @@ int	main(int ac, char **av)
 	{
 		if (ft_atoi(av[1]) <= 0)
 		{
-		write(1, "ERROR\n", 6);
-		return(1);
-        }
-        while (ft_strlen(av[2]) >= i)
+			ft_putstr("ERROR\n");
+			return (1);
+		}
+		while (ft_strlen(av[2]) >= i)
 		{
-        	char_by_char(ft_atoi(av[1]), av[2][i]);
+			char_by_char(ft_atoi(av[1]), av[2][i]);
 			i++;
 		}
 	}
 	else
-		write(1, "ERROR\n", 6);
+		ft_putstr("ERROR\n");
 }
-		

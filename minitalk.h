@@ -6,7 +6,7 @@
 /*   By: yachebla <yachebla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/28 14:30:34 by yachebla          #+#    #+#             */
-/*   Updated: 2023/02/13 18:29:39 by yachebla         ###   ########.fr       */
+/*   Updated: 2023/02/14 14:06:20 by yachebla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 
 void	ft_putchar(char c);
 void	ft_putstr(char *s);
-int     ft_atoi(const char *str);
+int		ft_atoi(const char *str);
 size_t	ft_strlen(const char *s);
 void	ft_putnbr(int n);
 
