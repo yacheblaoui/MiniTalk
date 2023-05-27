@@ -12,6 +12,18 @@
 
 #include "minitalk.h"
 
+size_t	ft_strlen(const char *s)
+{
+	size_t	i;
+
+	i = 0;
+	while (s[i])
+	{
+		i++;
+	}
+	return (i);
+}
+
 void	ft_putchar(char c)
 {
 	write (1, &c, 1);
@@ -31,18 +43,13 @@ void	ft_putstr(char *s)
 
 void	ft_putnbr(int n)
 {
-	if (n == -2147483648)
-	{
-		write (1, "-2147483648", 11);
-		return ;
-	}
 	if (n >= 0 && n < 10)
 	{
 		ft_putchar(n + '0');
 	}
 	else if (n < 0)
 	{
-		ft_putchar ('-');
+		ft_putchar('-');
 		ft_putnbr (n *(-1));
 	}
 	else
@@ -52,7 +59,7 @@ void	ft_putnbr(int n)
 	}
 }
 
-int	ft_atoi(const char *str)
+int	ft_atoi(char *s)
 {
 	int			i;
 	int			j;
@@ -61,30 +68,18 @@ int	ft_atoi(const char *str)
 	i = 0;
 	j = 1;
 	nb = 0;
-	while ((str[i] >= 9 && str[i] <= 13) || str[i] == 32)
+	while ((s[i] >= 9 && s[i] <= 13) || s[i] == 32)
 		i++;
-	if (str[i] == '-' || str[i] == '+')
+	if (s[i] == '-' || s[i] == '+')
 	{
-		if (str[i] == '-')
+		if (s[i++] == '-')
 			j = -1;
-		i++;
 	}
-	while (str[i] >= '0' && '9' >= str[i])
+	while (s[i] >= '0' && '9' >= s[i])
 	{
-		nb = (nb * 10) + (str[i] - '0');
-		i++;
+		s[i] -= '0';
+		nb = (nb * 10) + s[i++];
 	}
-	return (nb * j);
-}
-
-size_t	ft_strlen(const char *s)
-{
-	size_t	i;
-
-	i = 0;
-	while (s[i] != '\0')
-	{
-		i++;
-	}
-	return (i);
+	nb *= j;
+	return (nb);
 }

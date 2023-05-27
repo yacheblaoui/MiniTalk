@@ -20,8 +20,9 @@
 
 void	ft_putchar(char c);
 void	ft_putstr(char *s);
-int		ft_atoi(const char *str);
+int		ft_atoi(char *s);
 size_t	ft_strlen(const char *s);
 void	ft_putnbr(int n);
 
 #endif
+

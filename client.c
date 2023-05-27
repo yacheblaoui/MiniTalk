@@ -12,7 +12,7 @@
 
 #include "minitalk.h"
 
-static	void	ft_shift(int pid, char c)
+static	void	ft_send_bit_signals(int pid, char c)
 {
 	int	i;
 
@@ -23,28 +23,33 @@ static	void	ft_shift(int pid, char c)
 			kill(pid, SIGUSR1);
 		else
 			kill(pid, SIGUSR2);
-		usleep(500);
+		usleep(450);
 	}
 }
 
-int	main(int ac, char **av)
+int	main(int argc, char **argv)
 {
-	int		pid;
+	int		pid_server;
 	size_t	i;
+	size_t	len;
 
 	i = 0;
-	if (ac == 3)
+	if (argc != 3) 
 	{
-        pid = ft_atoi(av[1]);
-		if (pid <= 0)
-		{
-		write(1, "ERROR\n", 6);
-		return(1);
-        }
-        while (ft_strlen(av[2]) >= i)
-        ft_shift(pid, av[2][i++]);
+        ft_putstr("Error: invalid number of arguments\n");
+        return (1);
+    }
+    pid_server = ft_atoi(argv[1]);
+	if (pid_server <= 0)
+	{
+		ft_putstr("Error: invalid process ID\n");
+    	return (1);
+    }
+	len = ft_strlen(argv[2]);
+    while (len >= i)
+	{
+		ft_send_bit_signals(pid_server, argv[2][i]);
+		i++;
 	}
-	else
-		write(1, "ERROR\n", 6);
+	return (0);
 }
-		
