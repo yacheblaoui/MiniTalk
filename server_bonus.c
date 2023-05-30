@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   server.c                                           :+:      :+:    :+:   */
+/*   server_bonus.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yachebla <yachebla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/28 14:07:33 by yachebla          #+#    #+#             */
-/*   Updated: 2023/05/30 17:40:19 by yachebla         ###   ########.fr       */
+/*   Created: 2023/05/30 17:13:08 by yachebla          #+#    #+#             */
+/*   Updated: 2023/05/30 18:14:36 by yachebla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minitalk.h"
+#include "minitalk_bonus.h"
 
 void	signal_process(int *sig, char *char_to_print)
 {
@@ -36,6 +36,8 @@ void	signal_controller(int sig, siginfo_t *info, void *empty)
 	eight_bits++;
 	if (eight_bits == 8)
 	{
+		if (char_to_print == '\0')
+			kill(info->si_pid, SIGUSR2);
 		write(1, &char_to_print, 1);
 		eight_bits = 0;
 		char_to_print = 0;

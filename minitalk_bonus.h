@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minitalk.h                                         :+:      :+:    :+:   */
+/*   minitalk_bonus.h                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yachebla <yachebla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/28 14:30:34 by yachebla          #+#    #+#             */
-/*   Updated: 2023/05/27 16:06:29 by yachebla         ###   ########.fr       */
+/*   Created: 2023/05/30 17:14:07 by yachebla          #+#    #+#             */
+/*   Updated: 2023/05/30 17:15:01 by yachebla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINITALK_H
-# define MINITALK_H
+#ifndef MINITALK_BONUS_H
+# define MINITALK_BONUS_H
 
 # include <stdio.h>
 # include <stdlib.h>

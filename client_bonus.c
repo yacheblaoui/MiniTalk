@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   client.c                                           :+:      :+:    :+:   */
+/*   client_bonus.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yachebla <yachebla@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/14 15:07:18 by yachebla          #+#    #+#             */
-/*   Updated: 2023/05/30 17:39:45 by yachebla         ###   ########.fr       */
+/*   Created: 2023/05/30 17:13:16 by yachebla          #+#    #+#             */
+/*   Updated: 2023/05/30 18:13:32 by yachebla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minitalk.h"
+#include "minitalk_bonus.h"
 
 static	void	ft_send_bit_signals(int pid, char c)
 {
@@ -24,6 +24,14 @@ static	void	ft_send_bit_signals(int pid, char c)
 		else
 			kill(pid, SIGUSR2);
 		usleep(450);
+	}
+}
+
+void	msg(int sig)
+{
+	if (sig == SIGUSR2)
+	{
+		write (1, "Has been Received successfully\n", 30);
 	}
 }
 
@@ -45,6 +53,7 @@ int	main(int argc, char **argv)
 		ft_putstr("Error: invalid process ID\n");
 		return (1);
 	}
+	signal (SIGUSR2, msg);
 	len = ft_strlen(argv[2]);
 	while (len >= i)
 	{
